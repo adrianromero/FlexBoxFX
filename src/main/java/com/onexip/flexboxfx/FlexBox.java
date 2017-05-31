@@ -147,9 +147,9 @@ public class FlexBox extends Pane {
             nodesList.add(new FlexBoxItem(node));
         }
 
-        if (getDirection().equals(FlexBoxDirection.ROW) || getDirection().equals(FlexBoxDirection.ROW_REVERSE)) { //todo:
+        if (getDirection() == FlexBoxDirection.ROW || getDirection() == FlexBoxDirection.ROW_REVERSE) { //todo:
             layoutChildrenForRowDirection(nodesList);
-        } else if (getDirection().equals(FlexBoxDirection.COLUMN) || getDirection().equals(FlexBoxDirection.COLUMN_REVERSE)) { //todo:
+        } else { //todo:
             layoutChildrenForColumnDirection(nodesList);
         }
 
