@@ -11,11 +11,11 @@ import javafx.stage.Stage;
  */
 public class TestItemsGrow extends Application
 {
+    @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Parent root = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TestItemsGrow.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);

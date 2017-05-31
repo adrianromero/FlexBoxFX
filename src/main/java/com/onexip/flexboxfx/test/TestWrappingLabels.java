@@ -11,11 +11,11 @@ import javafx.stage.Stage;
  */
 public class TestWrappingLabels extends Application
 {
+    @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Parent root = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TestWrappingLabels.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
