@@ -23,8 +23,6 @@ dependencies {
 
   testCompile('com.miglayout:miglayout-javafx:5.1.1-SNAPSHOT')
   testCompile group: 'junit', name: 'junit', version: '4.12'
-  testCompile("org.testfx:testfx-core:4.0.+")
-  testCompile("org.testfx:testfx-junit:4.0.+")
 }
 
 
