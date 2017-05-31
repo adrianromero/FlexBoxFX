@@ -308,7 +308,7 @@ public class FlexBox extends Pane
                 @Override
                 public int compare(FlexBoxItem item1, FlexBoxItem item2)
                 {
-                    return ((Integer) item1.order).compareTo(item2.order);
+                    return Integer.compare(item1.order, item2.order);
                 }
             });
         }
