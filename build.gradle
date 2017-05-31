@@ -29,86 +29,86 @@ dependencies {
 
 
 
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-task javadocJar(type: Jar) {
-  classifier = 'javadoc'
-  from javadoc
-}
-
-task sourcesJar(type: Jar) {
-  classifier = 'sources'
-  from sourceSets.main.allSource
-}
-
-artifacts {
-  archives javadocJar, sourcesJar
-}
-
-
-signing {
-  sign configurations.archives
-}
-
-def isReleaseBuild() {
-  return version.contains("SNAPSHOT") == false
-}
-
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
-
-      if (isReleaseBuild())
-      {
-        println 'RELEASE BUILD'
-       // sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-      }
-      else
-      {
-        println 'DEBUG BUILD'
-       // sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-          authentication(userName: ossrhUsername, password: ossrhPassword)
-        }
-      }
-
-
-      pom.project {
-        name 'FlexBoxFX'
-        packaging 'jar'
-        // optionally artifactId can be defined here
-        description 'port of CSS3 FlexBox'
-        //url 'http://www.example.com/example-application'
-
-        scm {
-          connection 'scm:git:git@github.com:UltraMixer/FlexBoxFX.git'
-          developerConnection 'scm:git:https://github.com/UltraMixer/FlexBoxFX.git'
-          url 'https://github.com/UltraMixer/FlexBoxFX'
-        }
-
-        licenses {
-          license {
-            name 'The Apache License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-          }
-        }
-
-        developers {
-          developer {
-            id 'tobiasbley'
-            name 'Tobias Bley'
-            email 'info@onexip.com'
-          }
-        }
-      }
-    }
-  }
-}
+//apply plugin: 'maven'
+//apply plugin: 'signing'
+//
+//task javadocJar(type: Jar) {
+//  classifier = 'javadoc'
+//  from javadoc
+//}
+//
+//task sourcesJar(type: Jar) {
+//  classifier = 'sources'
+//  from sourceSets.main.allSource
+//}
+//
+//artifacts {
+//  archives javadocJar, sourcesJar
+//}
+//
+//
+//signing {
+//  sign configurations.archives
+//}
+//
+//def isReleaseBuild() {
+//  return version.contains("SNAPSHOT") == false
+//}
+//
+//
+//uploadArchives {
+//  repositories {
+//    mavenDeployer {
+//      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+//
+//      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+//        authentication(userName: ossrhUsername, password: ossrhPassword)
+//      }
+//
+//      if (isReleaseBuild())
+//      {
+//        println 'RELEASE BUILD'
+//       // sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+//      }
+//      else
+//      {
+//        println 'DEBUG BUILD'
+//       // sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+//        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+//          authentication(userName: ossrhUsername, password: ossrhPassword)
+//        }
+//      }
+//
+//
+//      pom.project {
+//        name 'FlexBoxFX'
+//        packaging 'jar'
+//        // optionally artifactId can be defined here
+//        description 'port of CSS3 FlexBox'
+//        //url 'http://www.example.com/example-application'
+//
+//        scm {
+//          connection 'scm:git:git@github.com:UltraMixer/FlexBoxFX.git'
+//          developerConnection 'scm:git:https://github.com/UltraMixer/FlexBoxFX.git'
+//          url 'https://github.com/UltraMixer/FlexBoxFX'
+//        }
+//
+//        licenses {
+//          license {
+//            name 'The Apache License, Version 2.0'
+//            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//          }
+//        }
+//
+//        developers {
+//          developer {
+//            id 'tobiasbley'
+//            name 'Tobias Bley'
+//            email 'info@onexip.com'
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
 
