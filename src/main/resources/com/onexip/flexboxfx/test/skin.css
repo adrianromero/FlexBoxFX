@@ -1,26 +1,21 @@
 .item {
     -fx-min-width: 150px;
-    -fx-max-width: 800px;
-    -fx-background-color: transparent;
-    -fx-background-radius: 0;
-    -fx-font-size: 16px;
-    -fx-padding: 20;
+    -fx-max-width: 1800px;
 }
 
 .item1 {
-    -fx-background-color: yellow;
-
+    -fx-base: lightyellow;
 }
 
 .item2 {
-    -fx-background-color: red;
+    -fx-base: coral;
 }
 
 .item3 {
-    -fx-background-color: green;
+    -fx-base: lightgreen;
 }
 
 .flex-pane {
-    -fx-background-color: black;
-    -fx-padding: 0 0 20px 0;
+    -fx-background-color: darkgray;
+    -fx-padding: 20px;
 }
