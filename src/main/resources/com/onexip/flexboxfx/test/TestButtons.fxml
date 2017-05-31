@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import com.onexip.flexboxfx.FlexBox?>
 <VBox
-        xmlns:fx="http://javafx.com/fxml"
-        stylesheets="@skin.css"
-        prefWidth="800" prefHeight="300">
+    xmlns:fx="http://javafx.com/fxml"
+    stylesheets="@skin.css"
+    prefWidth="800" prefHeight="300">
     <FlexBox fx:id="flexBoxPane" horizontalSpace="20" verticalSpace="20" styleClass="flex-pane" direction="ROW">
         <Button text="Item 1" styleClass="item,item1"></Button>
         <Button text="Item 2" styleClass="item,item2"></Button>

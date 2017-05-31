@@ -5,9 +5,9 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 <VBox
-        xmlns:fx="http://javafx.com/fxml"
-        stylesheets="@skin.css"
-        prefWidth="800" prefHeight="300">
+    xmlns:fx="http://javafx.com/fxml"
+    stylesheets="@skin.css"
+    prefWidth="800" prefHeight="300">
     <FlexBox fx:id="flexBoxPane" horizontalSpace="20" verticalSpace="20" styleClass="flex-pane" direction="ROW">
         <Button text="flex-grow: 1" styleClass="item,item1" FlexBox.grow="1"></Button>
         <Button text="flex-grow: 2" styleClass="item,item2" FlexBox.grow="2"></Button>

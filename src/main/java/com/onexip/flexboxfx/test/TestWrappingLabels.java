@@ -9,11 +9,10 @@ import javafx.stage.Stage;
 /**
  * Created by TB on 11.10.16.
  */
-public class TestWrappingLabels extends Application
-{
+public class TestWrappingLabels extends Application {
+
     @Override
-    public void start(Stage primaryStage) throws Exception
-    {
+    public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TestWrappingLabels.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -22,8 +21,7 @@ public class TestWrappingLabels extends Application
         primaryStage.show();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 }

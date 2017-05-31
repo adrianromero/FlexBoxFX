@@ -5,12 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import com.onexip.flexboxfx.test.HorizontalStackPane?>
 <VBox
-        xmlns:fx="http://javafx.com/fxml"
-        prefWidth="800" prefHeight="300">
+    xmlns:fx="http://javafx.com/fxml"
+    prefWidth="800" prefHeight="300">
     <HorizontalStackPane fx:id="flexBoxPane" styleClass="flex-pane">
         <TextFlow>
-            <Text text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate"
-                  styleClass="item,item1"></Text>
+            <Text text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate" 
+                  styleClass="item,item1">
+            </Text>
         </TextFlow>
     </HorizontalStackPane>
 </VBox>

@@ -9,11 +9,10 @@ import javafx.stage.Stage;
 /**
  * Created by TB on 11.10.16.
  */
-public class TestButtons extends Application
-{
+public class TestButtons extends Application {
+
     @Override
-    public void start(Stage primaryStage) throws Exception
-    {
+    public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TestButtons.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -21,8 +20,8 @@ public class TestButtons extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         launch(args);
-    }    
+    }
 }

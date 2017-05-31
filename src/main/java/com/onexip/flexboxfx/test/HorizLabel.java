@@ -6,11 +6,10 @@ import javafx.scene.control.Label;
 /**
  * Created by TB on 17.10.16.
  */
-public class HorizLabel extends Label
-{
+public class HorizLabel extends Label {
+
     @Override
-    public Orientation getContentBias()
-    {
+    public Orientation getContentBias() {
         return Orientation.VERTICAL;
     }
 }
