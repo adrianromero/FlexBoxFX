@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-  compile('org.apache.commons:commons-collections4:4.1+')
 }
 
 
