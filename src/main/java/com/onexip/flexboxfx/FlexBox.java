@@ -59,8 +59,6 @@ public class FlexBox extends Pane {
         this.verticalSpace.set(verticalSpace);
     }
 
-    private final HashMap<Integer, FlexBoxRow> grid = new HashMap<>();
-
     /**
      * By default, flex items are laid out in the source order. However, the
      * order property controls the order in which they appear in the flex
@@ -142,8 +140,6 @@ public class FlexBox extends Pane {
     protected void layoutChildren() {
         long timeStart = System.nanoTime();
 
-        grid.clear();
-
         List<FlexBoxItem> nodesList = new ArrayList<>();
 
         /**
@@ -153,11 +149,9 @@ public class FlexBox extends Pane {
             nodesList.add(new FlexBoxItem(node));
         }
 
-        if (getDirection().equals(FlexBoxDirection.ROW) || getDirection().equals(FlexBoxDirection.ROW_REVERSE)) //todo:
-        {
+        if (getDirection().equals(FlexBoxDirection.ROW) || getDirection().equals(FlexBoxDirection.ROW_REVERSE)) { //todo:
             layoutChildrenForRowDirection(nodesList);
-        } else if (getDirection().equals(FlexBoxDirection.COLUMN) || getDirection().equals(FlexBoxDirection.COLUMN_REVERSE)) //todo:
-        {
+        } else if (getDirection().equals(FlexBoxDirection.COLUMN) || getDirection().equals(FlexBoxDirection.COLUMN_REVERSE)) { //todo:
             layoutChildrenForColumnDirection(nodesList);
         }
 
@@ -165,17 +159,18 @@ public class FlexBox extends Pane {
     }
 
     private void layoutChildrenForColumnDirection(List<FlexBoxItem> nodesList) {
+
+        Map<Integer, FlexBoxRow> grid = new HashMap<>();
         double w = getWidth();
         double growWidth = w - getPadding().getLeft() - getPadding().getRight();
 
-        //  double lastX2 = 0;
         int row = 0;
         int i = 0;
 
         for (FlexBoxItem flexBoxItem : nodesList) {
             FlexBoxRow flexBoxRow = new FlexBoxRow();
             flexBoxRow.addFlexBoxItem(flexBoxItem);
-            addToGrid(row, flexBoxRow);
+            grid.put(row, flexBoxRow);
             row++;
             i++;
         }
@@ -217,8 +212,10 @@ public class FlexBox extends Pane {
     }
 
     private void layoutChildrenForRowDirection(List<FlexBoxItem> nodesList) {
+
         performingLayout = true;
 
+        Map<Integer, FlexBoxRow> grid = new HashMap<>();
         double w = getWidth();
         double minWidthSum = 0;
         double noNodes = nodesList.size();
@@ -226,7 +223,7 @@ public class FlexBox extends Pane {
         int i = 0;
 
         /**
-         * Precaluclations
+         * Precalculations
          */
         boolean useOrder = false;
         for (FlexBoxItem flexBoxItem : nodesList) {
@@ -246,7 +243,7 @@ public class FlexBox extends Pane {
          * Calculate column-row-grid for auto wrapping
          */
         FlexBoxRow flexBoxRow = new FlexBoxRow();
-        addToGrid(row, flexBoxRow);
+        grid.put(row, flexBoxRow);
 
         for (FlexBoxItem flexBoxItem : nodesList) {
             double nodeWidth = flexBoxItem.minWidth;
@@ -260,7 +257,7 @@ public class FlexBox extends Pane {
             if ((int) minWidthSum > (int) w) {
                 row++;
                 flexBoxRow = new FlexBoxRow();
-                addToGrid(row, flexBoxRow);
+                grid.put(row, flexBoxRow);
             }
             flexBoxRow.rowMinWidth += flexBoxItem.minWidth;
             flexBoxRow.flexGrowSum += flexBoxItem.grow;
@@ -326,9 +323,5 @@ public class FlexBox extends Pane {
             return;
         }
         super.requestLayout();
-    }
-
-    private void addToGrid(int row, FlexBoxRow flexBoxRow) {
-        grid.put(row, flexBoxRow);
     }
 }
