@@ -14,14 +14,15 @@ import java.util.logging.Logger;
 public class FlexBox extends Pane {
 
     private final static Logger LOGGER = Logger.getLogger(FlexBox.class.getName());
-
+    
+    private static final String ORDER_CONSTRAINT = "flexbox-order";
+    private static final String GROW_CONSTRAINT = "flexbox-grow";
+    
     private final SimpleDoubleProperty horizontalSpace = new SimpleDoubleProperty(0);
     private final SimpleDoubleProperty verticalSpace = new SimpleDoubleProperty(0);
     private final SimpleObjectProperty<FlexBoxDirection> direction = new SimpleObjectProperty<>(FlexBoxDirection.ROW);
     private double computedMinHeight;
     private boolean performingLayout = false;
-    private static final String ORDER_CONSTRAINT = "flexbox-order";
-    private static final String GROW_CONSTRAINT = "flexbox-grow";
 
     public FlexBoxDirection getDirection() {
         return direction.get();
@@ -99,13 +100,13 @@ public class FlexBox extends Pane {
     public static double getGrow(Node child) {
         Object o = getConstraint(child, GROW_CONSTRAINT);
         if (o == null) {
-            return 1;
+            return 1.0;
         } else {
             return (double) o;
         }
     }
 
-    static void setConstraint(Node node, Object key, Object value) {
+    private static void setConstraint(Node node, Object key, Object value) {
         if (value == null) {
             node.getProperties().remove(key);
         } else {
@@ -116,12 +117,9 @@ public class FlexBox extends Pane {
         }
     }
 
-    static Object getConstraint(Node node, Object key) {
+    private static Object getConstraint(Node node, Object key) {
         if (node.hasProperties()) {
-            Object value = node.getProperties().get(key);
-            if (value != null) {
-                return value;
-            }
+            return node.getProperties().get(key);
         }
         return null;
     }
