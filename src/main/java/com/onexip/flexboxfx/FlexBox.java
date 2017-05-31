@@ -137,7 +137,9 @@ public class FlexBox extends Pane {
     @Override
     protected void layoutChildren() {
         long timeStart = System.nanoTime();
-
+        
+        performingLayout = true;
+        
         List<FlexBoxItem> nodesList = new ArrayList<>();
 
         /**
@@ -152,7 +154,9 @@ public class FlexBox extends Pane {
         } else { //todo:
             layoutChildrenForColumnDirection(nodesList);
         }
-
+        
+        performingLayout = false;
+        
         LOGGER.log(Level.FINE, "Layout duration: {0} ms", (System.nanoTime() - timeStart) / 1000L);
     }
 
@@ -210,8 +214,6 @@ public class FlexBox extends Pane {
     }
 
     private void layoutChildrenForRowDirection(List<FlexBoxItem> nodesList) {
-
-        performingLayout = true;
 
         Map<Integer, FlexBoxRow> grid = new HashMap<>();
         double w = getWidth();
@@ -312,7 +314,6 @@ public class FlexBox extends Pane {
         setMinHeight(lastY2);
         setPrefWidth(lastY2);
         computedMinHeight = lastY2;
-        performingLayout = false;
     }
 
     @Override
