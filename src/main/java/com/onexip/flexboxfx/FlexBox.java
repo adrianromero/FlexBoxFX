@@ -2,7 +2,6 @@ package com.onexip.flexboxfx;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import org.apache.commons.collections4.iterators.ReverseListIterator;
@@ -285,18 +284,7 @@ public class FlexBox extends Pane
 
         if (useOrder)
         {
-            Collections.sort(nodesList, new Comparator<FlexBoxItem>()
-            {
-                @Override
-                public int compare(FlexBoxItem item1, FlexBoxItem item2)
-                {
-                    return Integer.compare(item1.order, item2.order);
-                }
-            });
-        }
-        else
-        {
-            nodesList = FXCollections.observableArrayList(nodesList);
+            Collections.sort(nodesList, (FlexBoxItem item1, FlexBoxItem item2) -> Integer.compare(item1.order, item2.order));
         }
 
         /**
@@ -346,18 +334,12 @@ public class FlexBox extends Pane
             double remainingWidth = w - flexBoxRow.rowMinWidth - (getHorizontalSpace() * (noRowNodes - 1)) - getPadding().getLeft() - getPadding().getRight();
             double flexGrowCellWidth = remainingWidth / flexBoxRow.flexGrowSum;
 
-            ListIterator<FlexBoxItem> rowNodexIterator = null;
-            if (getDirection().equals(FlexBoxDirection.ROW_REVERSE))
-            {
-                rowNodexIterator = new ReverseListIterator<>(rowNodes);
-            }
-            else
-            {
-                rowNodexIterator = rowNodes.listIterator();
-            }
+            ListIterator<FlexBoxItem> rowNodexIterator = (getDirection() == FlexBoxDirection.ROW_REVERSE) 
+                    ? new ReverseListIterator<>(rowNodes)
+                    : rowNodes.listIterator();
 
             double rowNodeX2 = getPadding().getLeft();
-            double lastMaxHeight = 0;
+            double lastMaxHeight = 0.0;
 
             //iterate nodes of row
             while (rowNodexIterator.hasNext())
