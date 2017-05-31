@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 class FlexBoxRow
 {
-    public double rowMinWidth = 0;
+    public double rowMinWidth = 0.0;
     private ArrayList<FlexBoxItem> nodes;
-    public double flexGrowSum = 0;
+    public double flexGrowSum = 0.0;
 
     public void addFlexBoxItem(FlexBoxItem flexBoxItem)
     {

@@ -5,8 +5,8 @@ package com.onexip.flexboxfx;
  */
 public enum FlexBoxDirection
 {
-    ROW(),
-    ROW_REVERSE(),
-    COLUMN(),
-    COLUMN_REVERSE();
+    ROW,
+    ROW_REVERSE,
+    COLUMN,
+    COLUMN_REVERSE
 }

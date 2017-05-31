@@ -204,22 +204,11 @@ public class FlexBox extends Pane
     private void layoutChildrenForColumnDirection(List<FlexBoxItem> nodesList)
     {
         double w = getWidth();
-        int noNodes = nodesList.size();
         double growWidth = w - getPadding().getLeft() - getPadding().getRight();
 
         //  double lastX2 = 0;
         int row = 0;
         int i = 0;
-
-        ListIterator<Node> nodeIterator = null;
-        if (getDirection().equals(FlexBoxDirection.COLUMN_REVERSE))
-        {
-            nodeIterator = new ReverseListIterator<>(getManagedChildren());
-        }
-        else
-        {
-            nodeIterator = getManagedChildren().listIterator();
-        }
 
         for (FlexBoxItem flexBoxItem : nodesList)
         {
@@ -275,9 +264,7 @@ public class FlexBox extends Pane
 
         double w = getWidth();
         double minWidthSum = 0;
-        double noNodes = 0;
-        noNodes = nodesList.size();
-        double growWidth = (w - (getHorizontalSpace() * (noNodes - 1)) - getPadding().getLeft() - getPadding().getRight()) / noNodes;
+        double noNodes = nodesList.size();
         int row = 0;
         int i = 0;
 
@@ -320,8 +307,7 @@ public class FlexBox extends Pane
 
         for (FlexBoxItem flexBoxItem : nodesList)
         {
-            double nodeWidth = Math.max(growWidth, flexBoxItem.minWidth);
-            nodeWidth = flexBoxItem.minWidth;
+            double nodeWidth = flexBoxItem.minWidth;
             minWidthSum += nodeWidth;
 
             //is there one more node?
@@ -346,7 +332,6 @@ public class FlexBox extends Pane
         double lastY2 = getPadding().getTop();
         i = 0;
         int noGridRows = grid.size();
-        flexBoxRow = null;
         /**
          * iterate grid to calculate node sizes and positions
          * iterate grid-rows first

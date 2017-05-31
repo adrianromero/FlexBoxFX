@@ -7,10 +7,11 @@ import javafx.scene.Node;
  */
 class FlexBoxItem
 {
+    public final Node node;
+
     public int order = 0;
-    public double grow = 0;
-    public Node node;
-    public double minWidth=0;
+    public double grow = 0.0;
+    public double minWidth = 0.0;
 
     public FlexBoxItem(Node node)
     {
