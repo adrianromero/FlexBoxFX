@@ -4,8 +4,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import org.apache.commons.collections4.iterators.ReverseListIterator;
-
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -287,16 +285,15 @@ public class FlexBox extends Pane {
             double remainingWidth = w - flexBoxRow.rowMinWidth - (getHorizontalSpace() * (noRowNodes - 1)) - getPadding().getLeft() - getPadding().getRight();
             double flexGrowCellWidth = remainingWidth / flexBoxRow.flexGrowSum;
 
-            ListIterator<FlexBoxItem> rowNodexIterator = (getDirection() == FlexBoxDirection.ROW_REVERSE)
-                    ? new ReverseListIterator<>(rowNodes)
-                    : rowNodes.listIterator();
+            Iterable<FlexBoxItem> rowNodexIterator = (getDirection() == FlexBoxDirection.ROW_REVERSE)
+                    ? ReverseIterable.reverse(rowNodes)
+                    : rowNodes;
 
             double rowNodeX2 = getPadding().getLeft();
             double lastMaxHeight = 0.0;
 
             //iterate nodes of row
-            while (rowNodexIterator.hasNext()) {
-                FlexBoxItem flexBoxItem = rowNodexIterator.next();
+            for (FlexBoxItem flexBoxItem : rowNodexIterator) {
                 Node rowNode = flexBoxItem.node;
 
                 double rowNodeMinWidth = flexBoxItem.minWidth;
