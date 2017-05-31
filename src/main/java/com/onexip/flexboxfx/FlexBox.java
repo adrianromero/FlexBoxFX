@@ -8,18 +8,21 @@ import javafx.scene.layout.Pane;
 import org.apache.commons.collections4.iterators.ReverseListIterator;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by TB on 11.10.16.
  */
 public class FlexBox extends Pane
 {
+    private final static Logger LOGGER = Logger.getLogger(FlexBox.class.getName());
+        
     private final SimpleDoubleProperty horizontalSpace = new SimpleDoubleProperty(0);
     private final SimpleDoubleProperty verticalSpace = new SimpleDoubleProperty(0);
     private final SimpleObjectProperty<FlexBoxDirection> direction = new SimpleObjectProperty<>(FlexBoxDirection.ROW);
     private double computedMinHeight;
     private boolean performingLayout = false;
-    private boolean verbose = true;
     private static final String ORDER_CONSTRAINT = "flexbox-order";
     private static final String GROW_CONSTRAINT = "flexbox-grow";
 
@@ -172,9 +175,6 @@ public class FlexBox extends Pane
     @Override
     protected void layoutChildren()
     {
-        //System.out.println("layoutChildren");
-        //super.layoutChildren();
-
         long timeStart = System.nanoTime();
 
         grid.clear();
@@ -198,8 +198,7 @@ public class FlexBox extends Pane
             layoutChildrenForColumnDirection(nodesList);
         }
 
-        long duration = System.nanoTime() - timeStart;
-        System.out.println(String.format("# layout duration: %d ms", duration / 1000));
+        LOGGER.log(Level.FINE, "Layout duration: {0} ms", (System.nanoTime() - timeStart) / 1000L);
     }
 
     private void layoutChildrenForColumnDirection(List<FlexBoxItem> nodesList)
@@ -231,11 +230,7 @@ public class FlexBox extends Pane
             i++;
         }
 
-        if (verbose)
-        {
-            System.out.println("grid = " + grid);
-        }
-
+        LOGGER.log(Level.FINE, "Grid = {0}", grid.toString());
 
         //Rows durchgehen und width berechnen
         double lastY2 = getPadding().getTop();
