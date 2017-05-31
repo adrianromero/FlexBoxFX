@@ -216,18 +216,14 @@ public class FlexBox extends Pane {
     private void layoutChildrenForRowDirection(List<FlexBoxItem> nodesList) {
 
         Map<Integer, FlexBoxRow> grid = new HashMap<>();
-        double w = getWidth();
-        double minWidthSum = 0;
-        double noNodes = nodesList.size();
-        int row = 0;
-        int i = 0;
+        double w = getWidth() - getPadding().getLeft() - getPadding().getRight();
 
         /**
          * Precalculations
          */
         boolean useOrder = false;
         for (FlexBoxItem flexBoxItem : nodesList) {
-            flexBoxItem.minWidth = flexBoxItem.node.minWidth(10);
+            flexBoxItem.minWidth = flexBoxItem.node.minWidth(10.0);
             flexBoxItem.order = getOrder(flexBoxItem.node);
             if (flexBoxItem.order != 0) {
                 useOrder = true;
@@ -242,29 +238,33 @@ public class FlexBox extends Pane {
         /**
          * Calculate column-row-grid for auto wrapping
          */
+        int row = 0;
+        double minWidthSum = 0.0;
         FlexBoxRow flexBoxRow = new FlexBoxRow();
         grid.put(row, flexBoxRow);
 
-        for (FlexBoxItem flexBoxItem : nodesList) {
-            double nodeWidth = flexBoxItem.minWidth;
+        int i = 0;
+        for (FlexBoxItem flexBoxItem : nodesList) {           
+            
+            double nodeWidth = flexBoxItem.minWidth;           
             minWidthSum += nodeWidth;
-
-            //is there one more node?
-            if (i + 1 < noNodes) {
+            if (flexBoxRow.getNodes().isEmpty()) {
+                // If empty the item must be included
+            } else {
                 minWidthSum += getHorizontalSpace();
-            }
-
-            if ((int) minWidthSum > (int) w) {
-                row++;
-                flexBoxRow = new FlexBoxRow();
-                grid.put(row, flexBoxRow);
-            }
+                if (minWidthSum > w) {                   
+                    row++;
+                    minWidthSum = nodeWidth;
+                    flexBoxRow = new FlexBoxRow();
+                    grid.put(row, flexBoxRow);
+                }                              
+            } 
+            
             flexBoxRow.rowMinWidth += flexBoxItem.minWidth;
             flexBoxRow.flexGrowSum += flexBoxItem.grow;
             flexBoxRow.addFlexBoxItem(flexBoxItem);
             i++;
         }
-
         //iterate rows and calculate width
         double lastY2 = getPadding().getTop();
         i = 0;
@@ -279,7 +279,7 @@ public class FlexBox extends Pane {
             ArrayList<FlexBoxItem> rowNodes = flexBoxRow.getNodes();
             int noRowNodes = rowNodes.size();
 
-            double remainingWidth = w - flexBoxRow.rowMinWidth - (getHorizontalSpace() * (noRowNodes - 1)) - getPadding().getLeft() - getPadding().getRight();
+            double remainingWidth = w - flexBoxRow.rowMinWidth - (getHorizontalSpace() * (noRowNodes - 1));
             double flexGrowCellWidth = remainingWidth / flexBoxRow.flexGrowSum;
 
             Iterable<FlexBoxItem> rowNodexIterator = (getDirection() == FlexBoxDirection.ROW_REVERSE)
