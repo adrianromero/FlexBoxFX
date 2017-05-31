@@ -3,7 +3,6 @@ package com.onexip.flexboxfx;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import org.apache.commons.collections4.iterators.ReverseListIterator;
@@ -15,13 +14,11 @@ import java.util.*;
  */
 public class FlexBox extends Pane
 {
-    private SimpleDoubleProperty horizontalSpace = new SimpleDoubleProperty(0);
-    private SimpleDoubleProperty verticalSpace = new SimpleDoubleProperty(0);
-    private SimpleObjectProperty<FlexBoxDirection> direction = new SimpleObjectProperty<FlexBoxDirection>(FlexBoxDirection.ROW);
+    private final SimpleDoubleProperty horizontalSpace = new SimpleDoubleProperty(0);
+    private final SimpleDoubleProperty verticalSpace = new SimpleDoubleProperty(0);
+    private final SimpleObjectProperty<FlexBoxDirection> direction = new SimpleObjectProperty<>(FlexBoxDirection.ROW);
     private double computedMinHeight;
     private boolean performingLayout = false;
-    private Orientation bias;
-    private boolean biasDirty = true;
     private boolean verbose = true;
     private static final String ORDER_CONSTRAINT = "flexbox-order";
     private static final String GROW_CONSTRAINT = "flexbox-grow";
@@ -72,7 +69,7 @@ public class FlexBox extends Pane
         this.verticalSpace.set(verticalSpace);
     }
 
-    private HashMap<Integer, FlexBoxRow> grid = new HashMap<Integer, FlexBoxRow>();
+    private final HashMap<Integer, FlexBoxRow> grid = new HashMap<>();
 
 
     /**
@@ -182,7 +179,7 @@ public class FlexBox extends Pane
 
         grid.clear();
 
-        List<FlexBoxItem> nodesList = new ArrayList<FlexBoxItem>();
+        List<FlexBoxItem> nodesList = new ArrayList<>();
 
         /**
          * First we transform all Nodes to a FlexBoxItem for caching purposes.
@@ -218,7 +215,7 @@ public class FlexBox extends Pane
         ListIterator<Node> nodeIterator = null;
         if (getDirection().equals(FlexBoxDirection.COLUMN_REVERSE))
         {
-            nodeIterator = new ReverseListIterator<Node>(getManagedChildren());
+            nodeIterator = new ReverseListIterator<>(getManagedChildren());
         }
         else
         {
@@ -372,7 +369,7 @@ public class FlexBox extends Pane
             ListIterator<FlexBoxItem> rowNodexIterator = null;
             if (getDirection().equals(FlexBoxDirection.ROW_REVERSE))
             {
-                rowNodexIterator = new ReverseListIterator<FlexBoxItem>(rowNodes);
+                rowNodexIterator = new ReverseListIterator<>(rowNodes);
             }
             else
             {
@@ -421,8 +418,6 @@ public class FlexBox extends Pane
         {
             return;
         }
-        biasDirty = true;
-        bias = null;
         super.requestLayout();
     }
 
